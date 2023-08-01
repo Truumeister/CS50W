@@ -4,6 +4,18 @@
         <title>Tasks</title>
         <script>
             document.addEventListener('DOMContentLoaded', function(){
+
+                //By default, submit button is diabled. If we want to prevent submit for working with no input then adjusting its .disabled = true; would not allow it to run
+                document.querySelector('#submit').disabled = true;
+
+                document.querySelector('#task').onkeyup = () => {
+                    if (document.querySelector('#task').value.length > 0){
+                    document.querySelector('#submit').disabled = false;
+                    } else {
+                        document.querySelector('#submit').disabled = true;
+                    }
+                }
+
                 document.querySelector('form').onsubmit = () => {
                     const task = document.querySelector('#task').value;
                     
@@ -13,6 +25,8 @@
 
                     document.querySelector('#tasks').append(li);
 
+                    document.querySelector('#task').value = '';
+                    //.value grabs the output from function or element. The empty brackets allows a clear field
                     //Stop form from submitting
                     return false; 
                 }
@@ -26,7 +40,7 @@
         </ul>
         <form>
             <input id="task" placeholder="New Task" type="text">
-            <input type="submit">
+            <input id="submit" type="submit">
         </form>
     </body>
 </html>
